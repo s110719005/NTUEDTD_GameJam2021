@@ -11,6 +11,12 @@ public class PlayerMovement : MonoBehaviour
     private bool isMoveRight = false;
     [SerializeField]
     private float moveSpeed = 5.0f;
+    [SerializeField]
+    private float moveDistance = 60.0f;
+
+    private Vector3 newPosition = new Vector3(0,0,0);
+    [SerializeField]
+    private LayerMask obstacleLayer;
     void Awake(){
         controls = new InputManager();
         
@@ -47,49 +53,70 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         if(isMoveUp){
-            transform.position += new Vector3(0,moveSpeed * Time.deltaTime,0);
+            newPosition = transform.position + new Vector3(0,moveDistance,0);
+            if(!Physics2D.OverlapCircle(newPosition,0.2f,obstacleLayer))
+                transform.position = Vector3.MoveTowards(transform.position,newPosition,moveDistance);
+
             isMoveUp = false;
         }
         else if(isMoveDown){
-            transform.position += new Vector3(0,-moveSpeed * Time.deltaTime,0);
+            newPosition = transform.position + new Vector3(0,-moveDistance,0);
+            if(!Physics2D.OverlapCircle(newPosition,0.2f,obstacleLayer))
+                transform.position = Vector3.MoveTowards(transform.position,newPosition,moveDistance);
+            
             isMoveDown = false;
         }
         else if(isMoveRight){
-            transform.position += new Vector3(moveSpeed * Time.deltaTime,0,0);
+            newPosition = transform.position + new Vector3(moveDistance,0,0);
+            if(!Physics2D.OverlapCircle(newPosition,0.2f,obstacleLayer))
+                transform.position = Vector3.MoveTowards(transform.position,newPosition,moveDistance);
+            
             isMoveRight = false;
         }
         else if(isMoveLeft){
-            transform.position += new Vector3(-moveSpeed * Time.deltaTime,0,0);
+            newPosition = transform.position + new Vector3(-moveDistance,0,0);
+            if(!Physics2D.OverlapCircle(newPosition,0.2f,obstacleLayer))
+                transform.position = Vector3.MoveTowards(transform.position,newPosition,moveDistance);
+            
             isMoveLeft = false;
         }
     }
     public void SetIsMoveUp(bool isUp){
-        isMoveUp = true;
+        isMoveUp = isUp;
+    }
+    public void SetIsMoveDown(bool isDown){
+        isMoveDown = isDown;
+    }
+    public void SetIsMoveRight(bool isRight){
+        isMoveRight = isRight;
+    }
+    public void SetIsMoveLeft(bool isLeft){
+        isMoveLeft = isLeft;
     }
 
     void MoveUpStart(){
-        isMoveUp = true;
+        //isMoveUp = true;
         //Debug.Log("move up pressed!");
     }
     void MoveUpCanceled(){
 
     }
     void MoveDownStart(){
-        isMoveDown = true;
+        //isMoveDown = true;
         //Debug.Log("move up pressed!");
     }
     void MoveDownCanceled(){
 
     }
     void MoveRightStart(){
-        isMoveRight = true;
+        //isMoveRight = true;
         //Debug.Log("move up pressed!");
     }
     void MoveRightCanceled(){
 
     }
     void MoveLeftStart(){
-        isMoveLeft = true;
+        //isMoveLeft = true;
         //Debug.Log("move up pressed!");
     }
     void MoveLeftCanceled(){
