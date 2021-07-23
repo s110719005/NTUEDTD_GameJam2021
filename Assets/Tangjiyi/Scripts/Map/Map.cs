@@ -6,7 +6,7 @@ namespace MapSystem
 
     public class Map : MonoBehaviour
     {
-        public static Map instance = null;
+        static Map instance = null;
         public static Map Instance
         {
             get { return instance ?? (instance = FindObjectOfType(typeof(Map)) as Map); }
@@ -19,64 +19,69 @@ namespace MapSystem
             if (instance == this) DontDestroyOnLoad(this);
             else DestroyImmediate(this);
         }
-
-        public Dictionary<(int, int), MapSection> mapSections = new Dictionary<(int, int), MapSection>();
+        //感謝學長大力支援!!
+        public Dictionary<Vector2Int, MapSection> mapSections = new Dictionary<Vector2Int, MapSection>();
 
         private void Start()
         {
             for (int i = 0; i < transform.childCount; i++)
             {
                 MapSection sec = transform.GetChild(i).GetComponent<MapSection>();
-                (sec.gridX, sec.gridY) = GetSectionGridPosFormWorldPos(sec.transform.position);
-                mapSections.Add((sec.gridX, sec.gridY), sec);
+                sec.gridPos = GetSectionGridPosFromWorldPos(sec.transform.position);
+                mapSections.Add(sec.gridPos, sec);
             }
         }
-
+        //TEMP
         public void Rotate(float eulerAngle)
         {
             transform.Rotate(0f, 0f, eulerAngle);
-            //awdwd
         }
 
-        public void SwapSectionByWorldPos(Vector2 target1, Vector2 target2)
+        //DONT USE
+        // public void SwapSectionByWorldPos(Vector2 target1, Vector2 target2)
+        // {
+        //     if (!mapSections.ContainsKey(GetSectionGridPosFromWorldPos(target1)) || !mapSections.ContainsKey(GetSectionGridPosFromWorldPos(target2)))
+        //     {
+        //         Debug.Log("Target not exits mate.");
+        //         return;
+        //     }
+        //     //swap pos
+        //     mapSections[GetSectionGridPosFromWorldPos(target1)].transform.position = target2;
+        //     mapSections[GetSectionGridPosFromWorldPos(target2)].transform.position = target1;
+
+        //     //update key
+        //     MapSection sec = mapSections[GetSectionGridPosFromWorldPos(target1)];
+        //     mapSections[GetSectionGridPosFromWorldPos(target1)] = mapSections[GetSectionGridPosFromWorldPos(target2)];
+        //     mapSections[GetSectionGridPosFromWorldPos(target1)] = sec;
+        // }
+
+        public void SwapSectionByGridPos(Vector2Int target1, Vector2Int target2)
         {
-            if (!mapSections.ContainsKey(GetSectionGridPosFormWorldPos(target1)) || !mapSections.ContainsKey(GetSectionGridPosFormWorldPos(target2)))
+            if (!mapSections.ContainsKey(target1) || !mapSections.ContainsKey(target2))
             {
                 Debug.Log("Target not exits mate.");
                 return;
             }
             //swap pos
-            mapSections[GetSectionGridPosFormWorldPos(target1)].transform.position = target2;
-            mapSections[GetSectionGridPosFormWorldPos(target2)].transform.position = target1;
+            Vector2 pos = mapSections[target1].transform.position;
+            mapSections[target1].transform.position = mapSections[target2].transform.position;
+            mapSections[target2].transform.position = pos;
+
+            //swap gridPos
+            mapSections[target1].gridPos = target2;
+            mapSections[target2].gridPos = target1;
 
             //update key
-            MapSection sec = mapSections[GetSectionGridPosFormWorldPos(target1)];
-            mapSections[GetSectionGridPosFormWorldPos(target1)] = mapSections[GetSectionGridPosFormWorldPos(target2)];
-            mapSections[GetSectionGridPosFormWorldPos(target1)] = sec;
-        }
+            MapSection sec = mapSections[target1];
+            mapSections[target1] = mapSections[target2];
+            mapSections[target2] = sec;
 
-        public void SwapSectionByGridPos(int gridX1, int gridY1, int gridX2, int gridY2)
-        {
-            if (!mapSections.ContainsKey((gridX1, gridY1)) || !mapSections.ContainsKey((gridX2, gridY2)))
-            {
-                Debug.Log("Target not exits mate.");
-                return;
-            }
-            //swap pos
-            Vector2 pos = mapSections[(gridX1, gridY1)].transform.position;
-            mapSections[(gridX1, gridY1)].transform.position = mapSections[(gridX2, gridY2)].transform.position;
-            mapSections[(gridX2, gridY2)].transform.position = pos;
-
-            //update key
-            MapSection sec = mapSections[(gridX1, gridY1)];
-            mapSections[(gridX1, gridY1)] = mapSections[(gridX2, gridY2)];
-            mapSections[(gridX2, gridY2)] = sec;
         }
 
         #region Grid position covert
-        public static (int, int) GetSectionGridPosFormWorldPos(Vector2 pos)
+        public static Vector2Int GetSectionGridPosFromWorldPos(Vector2 pos)
         {
-            return ((int)pos.x / 2, (int)pos.y / 2);
+            return new Vector2Int((int)pos.x / 2, (int)pos.y / 2);
         }
         #endregion
     }

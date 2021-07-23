@@ -9,11 +9,13 @@ public class PushTrap : MonoBehaviour
         RaycastHit2D target = Physics2D.Raycast(transform.position, transform.up, 20/*Map length is around 14*/, 1 << LayerMask.NameToLayer("Wall"));
         // Debug.Log($"{target2.collider.transform.parent.name}");
         Debug.Log(target.point);
-        other.transform.position = target.point+target.normal/2;
+        other.transform.position = target.point + target.normal / 2;
     }
+#if UNITY_EDITOR
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.black;
         Gizmos.DrawRay(transform.position, transform.up);
     }
+#endif
 }

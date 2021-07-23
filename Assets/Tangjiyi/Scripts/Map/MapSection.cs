@@ -6,7 +6,7 @@ namespace MapSystem
 
     public class MapSection : MonoBehaviour
     {
-        public int gridX,gridY;
+        public Vector2Int gridPos;
         public void Rotate(float eulerAngle)
         {
             transform.Rotate(0f, 0f, eulerAngle);
