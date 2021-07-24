@@ -45,6 +45,12 @@ public class MovementManager : MonoBehaviour
     {
         isStart = true;
     }
+    public void ClearAction()
+    {
+        playerActions.Clear();
+        Debug.Log(playerActions.Count);
+        Debug.Log("Queue Clear!");
+    }
     public void Action_MoveUp()
     {
         FindObjectOfType<PlayerMovement>().SetIsMoveUp(true);
