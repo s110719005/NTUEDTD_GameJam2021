@@ -167,7 +167,7 @@ public class MovementManager : MonoBehaviour
                     excutingRound = false;
                     currentRound = currentRound == 1 ? 2 : 1;
                     OnRoundStartEvent?.Invoke();
-                    //FindObjectOfType<UIManager>().OpenPanel();
+                    FindObjectOfType<UIManager>().OpenPanel();
 
                 }
             }
