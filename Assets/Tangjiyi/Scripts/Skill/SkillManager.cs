@@ -21,7 +21,7 @@ namespace SkillSystem
         }
         int selectedSkill = -1;
 
-        List<Skill> skills = new List<Skill>();
+        public List<Skill> skills = new List<Skill>();
         private void Start()
         {
             skills.Add(new SkillRotate(90));
@@ -46,20 +46,7 @@ namespace SkillSystem
                     skills[selectedSkill].MapUse(hit);
                     selectedSkill = -1;
                 }
-                else
-                {
-                    if (MovementManager.Instance.currentRound == 1)
-                    {
-                        //Debug.Log($"{target.collider.transform.parent.name}");
-                        skills[selectedSkill].Use(MovementManager.Instance.Player1.transform);
-                    }
-                    else
-                    {
-                        //Debug.Log($"{target.collider.transform.parent.name}");
-                        skills[selectedSkill].Use(MovementManager.Instance.Player2.transform);
-                    }
-                    selectedSkill = -1;
-                }
+
             }
         }
     }
