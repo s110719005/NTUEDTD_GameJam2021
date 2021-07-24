@@ -11,6 +11,14 @@ public class UIManager : MonoBehaviour
     [SerializeField]private float buttonPanelInDuration = 1.0f;
     [SerializeField]private Ease buttonPanelEaseIn;
     [SerializeField]private Ease buttonPanelEaseOut;
+
+    [System.Serializable] public class ActionInfo{
+        public string actionName;
+        public Sprite btnImage;
+    }
+
+    public List<ActionInfo> actionInfo;
+    public List<Image> actionPreview;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,5 +37,18 @@ public class UIManager : MonoBehaviour
     public void OpenPanel(){
         buttonPanel.DOAnchorPosX(-700,buttonPanelInDuration,true).SetEase(buttonPanelEaseIn);
 
+    }
+    public void SetPreviewSprite(int index,int type){
+        actionPreview[index].sprite = actionInfo[type].btnImage;
+        actionPreview[index].enabled = true;
+    }
+
+    public void ResetPreviewSprite(){
+        foreach(Image preview in actionPreview){
+            preview.enabled = false;
+        }
+    }
+    public void ExecutePreviewSprite(int index){
+        actionPreview[index].enabled = false;
     }
 }
