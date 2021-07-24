@@ -36,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Awake(){
 
-        _animator = GetComponent<Animator>();
+        _animator = GetComponentInChildren<Animator>();
         animationIdle = Animator.StringToHash("Player_Idle");
         animationWalkLeft = Animator.StringToHash("Player_Walk_Left");
         animationWalkRight = Animator.StringToHash("Player_Walk_Right");

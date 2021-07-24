@@ -7434,7 +7434,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 648870826}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f972ef2a970ed6949b3786bf249702f3, type: 3}
+  m_Script: {fileID: 11500000, guid: be24b569290639844acaeef9915f7cd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   actionType: 2
@@ -12160,7 +12160,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1108831353}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f972ef2a970ed6949b3786bf249702f3, type: 3}
+  m_Script: {fileID: 11500000, guid: be24b569290639844acaeef9915f7cd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   actionType: 20
@@ -12376,7 +12376,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1115514064}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f972ef2a970ed6949b3786bf249702f3, type: 3}
+  m_Script: {fileID: 11500000, guid: be24b569290639844acaeef9915f7cd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   actionType: 1
@@ -13560,7 +13560,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1187731427}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f972ef2a970ed6949b3786bf249702f3, type: 3}
+  m_Script: {fileID: 11500000, guid: be24b569290639844acaeef9915f7cd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   actionType: 0
@@ -13931,7 +13931,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1203824994}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f972ef2a970ed6949b3786bf249702f3, type: 3}
+  m_Script: {fileID: 11500000, guid: be24b569290639844acaeef9915f7cd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   actionType: 6
@@ -14820,7 +14820,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1259872548}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f972ef2a970ed6949b3786bf249702f3, type: 3}
+  m_Script: {fileID: 11500000, guid: be24b569290639844acaeef9915f7cd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   actionType: 4
@@ -16539,7 +16539,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1392642314}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f972ef2a970ed6949b3786bf249702f3, type: 3}
+  m_Script: {fileID: 11500000, guid: be24b569290639844acaeef9915f7cd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   actionType: 3
@@ -17747,7 +17747,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1463064279}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49c6c1dd445f7714190a132d5a8e5adc, type: 3}
+  m_Script: {fileID: 11500000, guid: 40605381d47d4d7409b8388cbf8a8c43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playNextDelay: 2
@@ -22925,7 +22925,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1930243568}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f972ef2a970ed6949b3786bf249702f3, type: 3}
+  m_Script: {fileID: 11500000, guid: be24b569290639844acaeef9915f7cd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   actionType: 5
@@ -23052,7 +23052,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bced35abec632448928ce4e214344ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds: []
+  sounds:
+  - name: ThemeMusic
+    clip: {fileID: 8300000, guid: 3a520984a5496c74f82a83acc6cb813d, type: 3}
+    volume: 0.334
+    pitch: 0.61
+    source: {fileID: 0}
+  - name: playerWalk
+    clip: {fileID: 8300000, guid: cbcd89763f8d7cb4486a41ab0f731678, type: 3}
+    volume: 0.334
+    pitch: 0.61
+    source: {fileID: 0}
+  - name: playerHitWall
+    clip: {fileID: 8300000, guid: e38de481774e0654f83c121ea010d05d, type: 3}
+    volume: 0.334
+    pitch: 0.61
+    source: {fileID: 0}
 --- !u!4 &1934600569
 Transform:
   m_ObjectHideFlags: 0
@@ -23065,7 +23080,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1936001162 stripped
 Transform:
@@ -24058,7 +24073,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &2028807938 stripped
 Transform:
