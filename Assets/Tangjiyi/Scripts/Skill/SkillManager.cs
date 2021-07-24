@@ -20,7 +20,11 @@ namespace SkillSystem
             else DestroyImmediate(this);
         }
         int selectedSkill = -1;
-
+        //This is bad, but i think this is fine;
+        public void UseMapSkill(int index)
+        {
+            selectedSkill = index;
+        }
         public List<Skill> skills = new List<Skill>();
         private void Start()
         {
