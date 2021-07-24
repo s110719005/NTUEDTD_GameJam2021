@@ -80,7 +80,7 @@ namespace MapSystem
         #region Grid position covert
         public static Vector2Int GetSectionGridPosFromWorldPos(Vector2 pos)
         {
-            return new Vector2Int((int)pos.x / 2, (int)pos.y / 2);
+            return new Vector2Int(1 + (int)pos.x / 2, 1 + (int)pos.y / 2);
         }
         #endregion
     }
