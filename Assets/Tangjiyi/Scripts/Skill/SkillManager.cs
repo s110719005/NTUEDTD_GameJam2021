@@ -25,8 +25,8 @@ namespace SkillSystem
         private void Start()
         {
             skills.Add(new SkillRotate(90));
-            skills.Add(new SkillRotate(180));
             skills.Add(new SkillRotate(-90));
+            skills.Add(new SkillRotate(180));
         }
 
         private void Update()

@@ -78,10 +78,10 @@ public class MovementManager : MonoBehaviour
                     SkillManager.Instance.skills[0].Use(MovementManager.Instance.Player1.transform);
                     break;
                 case 5:
-                    SkillManager.Instance.skills[0].Use(MovementManager.Instance.Player1.transform);
+                    SkillManager.Instance.skills[1].Use(MovementManager.Instance.Player1.transform);
                     break;
                 case 6:
-                    SkillManager.Instance.skills[0].Use(MovementManager.Instance.Player1.transform);
+                    SkillManager.Instance.skills[2].Use(MovementManager.Instance.Player1.transform);
                     break;
 
 
