@@ -6,7 +6,6 @@ namespace SkillSystem
 
     public abstract class Skill
     {
-        public bool needToMapSelectMap;
         public abstract void Use(Transform t);
         public abstract void MapUse(RaycastHit2D hit);
     }

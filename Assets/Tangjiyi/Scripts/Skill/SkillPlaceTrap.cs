@@ -10,22 +10,25 @@ namespace SkillSystem
         public SkillPlaceTrap(string trapPrefabName)
         {
             this.trapPrefabName = trapPrefabName;
-            needToMapSelectMap = true;
-        }
-        List<Collider2D> traps = new List<Collider2D>();
-        public SkillPlaceTrap()
-        {
             MovementManager.Instance.OnRoundStartEvent -= TrapsEnable;
             MovementManager.Instance.OnRoundStartEvent += TrapsEnable;
         }
+        List<Collider2D> traps = new List<Collider2D>();
+
         public override void MapUse(RaycastHit2D hit)
         {
+            Debug.Log(trapPrefabName);
             Vector2 pos = hit.transform.position;
             pos.x = ((int)pos.x) + 0.5f;
             pos.y = ((int)pos.y) + 0.5f;
-            GameObject trap = Resources.Load<GameObject>(trapPrefabName);
-            trap.transform.position = pos;
-            trap.transform.SetParent(Map.Instance.mapSections[Map.GetSectionGridPosFromWorldPos(pos)].transform);
+            GameObject trap = GameObject.Instantiate(
+                Resources.Load<GameObject>(trapPrefabName)
+                , pos
+                , Quaternion.identity
+                , Map.Instance.mapSections[Map.GetSectionGridPosFromWorldPos(pos)].transform
+            );
+            // trap.transform.position = pos;
+            // trap.transform.SetParent(Map.Instance.mapSections[Map.GetSectionGridPosFromWorldPos(pos)].transform);
             traps.Add(trap.GetComponent<Collider2D>());
             traps[traps.Count - 1].enabled = false;
         }
