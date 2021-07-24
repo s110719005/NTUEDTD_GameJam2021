@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/unicornn/StartScene.unity
     guid: f186b30d365d85b488e2aff670dd3e0f
   - enabled: 1
-    path: Assets/Tangjiyi/MapTest.unity
+    path: Assets/Tangjiyi/Map.unity
     guid: e6bf46dfe38ea7d4db8e0b270cd37d67
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 0b7413ca6861d6941a7c44abfec1cfa4,
