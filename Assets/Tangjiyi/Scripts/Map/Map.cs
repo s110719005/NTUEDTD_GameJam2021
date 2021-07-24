@@ -11,7 +11,6 @@ namespace MapSystem
         {
             get { return instance ?? (instance = FindObjectOfType(typeof(Map)) as Map); }
         }
-        public float gameDeltaTime;
         private void Awake()
         {
             instance = Map.Instance;
