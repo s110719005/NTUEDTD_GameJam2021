@@ -95,6 +95,9 @@ public class PlayerMovement : MonoBehaviour
                 transform.DOMove(newPosition,moveDuration).SetEase(playerMoveEase);
                 ChangeAnimationState(animationWalkUp);
                 Invoke("PlayIdleAnimation",moveDuration);//走路的動畫播一段時間才切回idle
+                //audio
+                FindObjectOfType<AudioManager>().Play("playerWalk");
+                Invoke("StopPlayerWalkAudio",moveDuration);
             }
                 //transform.position = Vector3.MoveTowards(transform.position,newPosition,moveDistance);
             else {
@@ -115,6 +118,9 @@ public class PlayerMovement : MonoBehaviour
                 transform.DOMove(newPosition,moveDuration).SetEase(playerMoveEase);
                 ChangeAnimationState(animationWalkDown);
                 Invoke("PlayIdleAnimation",moveDuration);//走路的動畫播一段時間才切回idle
+                //audio
+                FindObjectOfType<AudioManager>().Play("playerWalk");
+                Invoke("StopPlayerWalkAudio",moveDuration);
             }
             else {
                 DOTween.Sequence()
@@ -134,6 +140,9 @@ public class PlayerMovement : MonoBehaviour
                 transform.DOMove(newPosition,moveDuration).SetEase(playerMoveEase);
                 ChangeAnimationState(animationWalkRight);
                 Invoke("PlayIdleAnimation",moveDuration);//走路的動畫播一段時間才切回idle
+                //audio
+                FindObjectOfType<AudioManager>().Play("playerWalk");
+                Invoke("StopPlayerWalkAudio",moveDuration);
             }
             else {
                 DOTween.Sequence()
@@ -153,6 +162,9 @@ public class PlayerMovement : MonoBehaviour
                 transform.DOMove(newPosition,moveDuration).SetEase(playerMoveEase);
                 ChangeAnimationState(animationWalkLeft);
                 Invoke("PlayIdleAnimation",moveDuration);//走路的動畫播一段時間才切回idle
+                //audio
+                FindObjectOfType<AudioManager>().Play("playerWalk");
+                Invoke("StopPlayerWalkAudio",moveDuration);
             }
             else {
                 DOTween.Sequence()
@@ -169,6 +181,9 @@ public class PlayerMovement : MonoBehaviour
 
     void PlayIdleAnimation(){
         ChangeAnimationState(animationIdle);
+    }
+    void StopPlayerWalkAudio(){
+        FindObjectOfType<AudioManager>().Stop("playerWalk");
     }
     public void SetIsMoveUp(bool isUp){
         isMoveUp = isUp;
