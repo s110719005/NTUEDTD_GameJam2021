@@ -161,6 +161,8 @@ public class MovementManager : MonoBehaviour
                 }
                 else
                 {
+                    Debug.Log($"Player{currentRound}'s Order Done.");
+                    OnRoundStartEvent?.Invoke();
                     excutingRound = false;
                     currentRound = currentRound == 1 ? 2 : 1;
                 }
@@ -170,8 +172,8 @@ public class MovementManager : MonoBehaviour
 
         if (isStart)
         {
+            Debug.Log($"Excute Player{currentRound}'s Order.");
             isStart = false;
-            OnRoundStartEvent?.Invoke();
             excutingRound = true;
         }
 

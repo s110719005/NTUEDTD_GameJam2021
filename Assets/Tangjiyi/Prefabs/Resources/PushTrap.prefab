@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1101390995844231573}
   - component: {fileID: 1101390995844231572}
   - component: {fileID: 7791283757841711101}
-  - component: {fileID: 2071130408166425578}
+  - component: {fileID: 417744632381053436}
   m_Layer: 0
   m_Name: PushTrap
   m_TagString: Trap
@@ -111,7 +111,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.7, y: 0.7}
   m_EdgeRadius: 0
---- !u!114 &2071130408166425578
+--- !u!114 &417744632381053436
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -120,7 +120,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1101390995844231570}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3475756428fa91458823f86e3be3fd0, type: 3}
+  m_Script: {fileID: 11500000, guid: 2717fe9ab67b8bc43b7a44dae2f332ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  direction: 0

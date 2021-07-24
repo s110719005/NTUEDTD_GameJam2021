@@ -21,9 +21,11 @@ namespace SkillSystem
         }
         int selectedMapSkill = -1;
         //This is bad, but i think this is fine;
-        public void UseMapSkill(int index)
+        float angle;
+        public void UseMapSkill(int index, float angle)
         {
             selectedMapSkill = index;
+            this.angle = angle;
         }
         public List<Skill> skills = new List<Skill>();
         public List<Skill> mapSkills = new List<Skill>();
@@ -41,8 +43,9 @@ namespace SkillSystem
             if (selectedMapSkill != -1 && Input.GetMouseButtonDown(0))
             {
                 RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, 1 << LayerMask.NameToLayer("Floor"));
+                if (hit.transform == null) return;
                 Debug.Log(hit.transform.name);
-                mapSkills[selectedMapSkill].MapUse(hit);
+                mapSkills[selectedMapSkill].MapUse(hit, angle);
                 selectedMapSkill = -1;
             }
 

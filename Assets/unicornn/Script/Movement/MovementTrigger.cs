@@ -16,14 +16,4 @@ public class MovementTrigger : MonoBehaviour
             FindObjectOfType<MovementManager>().AddAction(actionType);
 
     }
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

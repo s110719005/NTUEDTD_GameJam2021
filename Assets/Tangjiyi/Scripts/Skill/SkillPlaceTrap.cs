@@ -15,16 +15,16 @@ namespace SkillSystem
         }
         List<Collider2D> traps = new List<Collider2D>();
 
-        public override void MapUse(RaycastHit2D hit)
+        public override void MapUse(RaycastHit2D hit,float angle)
         {
-            Debug.Log(trapPrefabName);
+            //Debug.Log(trapPrefabName);
             Vector2 pos = hit.transform.position;
             pos.x = ((int)pos.x) + 0.5f;
             pos.y = ((int)pos.y) + 0.5f;
             GameObject trap = GameObject.Instantiate(
                 Resources.Load<GameObject>(trapPrefabName)
                 , pos
-                , Quaternion.identity
+                , Quaternion.Euler(0,0,angle)
                 , Map.Instance.mapSections[Map.GetSectionGridPosFromWorldPos(pos)].transform
             );
             // trap.transform.position = pos;
