@@ -65,7 +65,11 @@ public class PlayerMovement : MonoBehaviour
             if(!Physics2D.OverlapCircle(newPosition,0.2f,obstacleLayer))
                 transform.DOMove(newPosition,moveDuration).SetEase(playerMoveEase);
                 //transform.position = Vector3.MoveTowards(transform.position,newPosition,moveDistance);
-
+            else {
+                DOTween.Sequence()
+                .Append(transform.DOMove(hitPosition,hitDuration).SetEase(playerHitEase))
+                .Append(transform.DOMove(originPosition,hitDuration).SetEase(playerHitEase2));
+            }
             isMoveUp = false;
         }
         else if(isMoveDown){
@@ -78,6 +82,7 @@ public class PlayerMovement : MonoBehaviour
                 DOTween.Sequence()
                 .Append(transform.DOMove(hitPosition,hitDuration).SetEase(playerHitEase))
                 .Append(transform.DOMove(originPosition,hitDuration).SetEase(playerHitEase2));
+                FindObjectOfType<AudioManager>().Play("playerHitWall");
             }
             isMoveDown = false;
         }
@@ -87,6 +92,11 @@ public class PlayerMovement : MonoBehaviour
             hitPosition = transform.position + new Vector3(moveDistance*0.2f,0,0);
             if(!Physics2D.OverlapCircle(newPosition,0.2f,obstacleLayer))
                 transform.DOMove(newPosition,moveDuration).SetEase(playerMoveEase);
+            else {
+                DOTween.Sequence()
+                .Append(transform.DOMove(hitPosition,hitDuration).SetEase(playerHitEase))
+                .Append(transform.DOMove(originPosition,hitDuration).SetEase(playerHitEase2));
+            }
             isMoveRight = false;
         }
         else if(isMoveLeft){
@@ -95,6 +105,11 @@ public class PlayerMovement : MonoBehaviour
             hitPosition = transform.position + new Vector3(-moveDistance*0.2f,0,0);
             if(!Physics2D.OverlapCircle(newPosition,0.2f,obstacleLayer))
                 transform.DOMove(newPosition,moveDuration).SetEase(playerMoveEase);
+            else {
+                DOTween.Sequence()
+                .Append(transform.DOMove(hitPosition,hitDuration).SetEase(playerHitEase))
+                .Append(transform.DOMove(originPosition,hitDuration).SetEase(playerHitEase2));
+            }
             
             isMoveLeft = false;
         }
