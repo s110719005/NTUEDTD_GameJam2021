@@ -163,6 +163,8 @@ public class MovementManager : MonoBehaviour
                 {
                     excutingRound = false;
                     currentRound = currentRound == 1 ? 2 : 1;
+                    FindObjectOfType<UIManager>().OpenPanel();
+
                 }
             }
             playNextTimer += Time.deltaTime;
