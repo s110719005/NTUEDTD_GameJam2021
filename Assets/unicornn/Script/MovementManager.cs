@@ -15,6 +15,11 @@ public class MovementManager : MonoBehaviour
     private int currentAction;
     [SerializeField]
     private float playNextDelay = 2.0f;
+    [SerializeField]
+    private GameObject Player1;
+    [SerializeField]
+    private GameObject Player2;
+    private int currentRound = 1;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,27 +38,55 @@ public class MovementManager : MonoBehaviour
     }
 
     void ActionSwitch(int actionType){
-        switch(actionType){
-            case 0:
-            FindObjectOfType<PlayerMovement>().SetIsMoveUp(true);
-            Debug.Log(playerActions.Count);
-            break;
-            case 1:
-            FindObjectOfType<PlayerMovement>().SetIsMoveDown(true);
-            Debug.Log(playerActions.Count);
-            break;
-            case 2:
-            FindObjectOfType<PlayerMovement>().SetIsMoveRight(true);
-            Debug.Log(playerActions.Count);
-            break;
-            case 3:
-            FindObjectOfType<PlayerMovement>().SetIsMoveLeft(true);
-            Debug.Log(playerActions.Count);
-            break;
+        if(currentRound==1){
+            switch(actionType){
+                case 0:
+                //FindObjectOfType<PlayerMovement>().SetIsMoveUp(true);
+                Player1.GetComponent<PlayerMovement>().SetIsMoveUp(true);
+                Debug.Log(playerActions.Count);
+                break;
+                case 1:
+                Player1.GetComponent<PlayerMovement>().SetIsMoveDown(true);
+                Debug.Log(playerActions.Count);
+                break;
+                case 2:
+                Player1.GetComponent<PlayerMovement>().SetIsMoveRight(true);
+                Debug.Log(playerActions.Count);
+                break;
+                case 3:
+                Player1.GetComponent<PlayerMovement>().SetIsMoveLeft(true);
+                Debug.Log(playerActions.Count);
+                break;
 
-            default:
-            break;
+                default:
+                break;
+            }
         }
+        else if(currentRound==2){
+            switch(actionType){
+                case 0:
+                //FindObjectOfType<PlayerMovement>().SetIsMoveUp(true);
+                Player2.GetComponent<PlayerMovement>().SetIsMoveUp(true);
+                Debug.Log(playerActions.Count);
+                break;
+                case 1:
+                Player2.GetComponent<PlayerMovement>().SetIsMoveDown(true);
+                Debug.Log(playerActions.Count);
+                break;
+                case 2:
+                Player2.GetComponent<PlayerMovement>().SetIsMoveRight(true);
+                Debug.Log(playerActions.Count);
+                break;
+                case 3:
+                Player2.GetComponent<PlayerMovement>().SetIsMoveLeft(true);
+                Debug.Log(playerActions.Count);
+                break;
+
+                default:
+                break;
+            }
+        }
+        
     }
 
     // Update is called once per frame
@@ -70,6 +103,10 @@ public class MovementManager : MonoBehaviour
                 canPlayNext = false;
                 currentAction = playerActions.Dequeue();
                 ActionSwitch(currentAction);
+                if(playerActions.Count==0) {
+                    if(currentRound==1) currentRound=2;
+                    else currentRound = 1;
+                }
             }
         }
         else{
