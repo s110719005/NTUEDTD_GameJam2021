@@ -13,7 +13,6 @@ namespace SkillSystem
         public SkillRotate(int angle)
         {
             this.angle = angle;
-            this.needToMapSelectMap = false;
         }
 
         public override void MapUse(RaycastHit2D hit)

@@ -38,19 +38,15 @@ namespace SkillSystem
 
         private void Update()
         {
-            if (selectedMapSkill != -1)
+            if (selectedMapSkill != -1 && Input.GetMouseButtonDown(0))
             {
-                if (skills[selectedMapSkill].needToMapSelectMap && Input.GetMouseButtonDown(0))
-                {
-
-
-                    RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, 1 << LayerMask.NameToLayer("Floor"));
-                    Debug.Log(hit.transform.name);
-                    skills[selectedMapSkill].MapUse(hit);
-                    selectedMapSkill = -1;
-                }
-
+                RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, 1 << LayerMask.NameToLayer("Floor"));
+                Debug.Log(hit.transform.name);
+                mapSkills[selectedMapSkill].MapUse(hit);
+                selectedMapSkill = -1;
             }
+
+
         }
     }
 
