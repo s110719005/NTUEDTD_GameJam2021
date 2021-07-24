@@ -67,6 +67,7 @@ public class MovementManager : MonoBehaviour
 
     void ActionSwitch(int actionType)
     {
+        playNextDelay = 2f;
         if (currentRound == 1)
         {
             Debug.Log($"cr: {currentRound}");
@@ -98,9 +99,6 @@ public class MovementManager : MonoBehaviour
                 case 6:
                     SkillManager.Instance.skills[2].Use(MovementManager.Instance.Player1.transform);
                     break;
-
-
-
                 default:
                     break;
             }
