@@ -28,6 +28,7 @@ namespace SkillSystem
             t.SetParent(target.transform);
             target.transform.GetComponentInParent<MapSection>().Rotate(angle);
             t.parent = null;
+            t.rotation = Quaternion.identity;
             // if (t.position.x > target.transform.position.x)
             // {
             //     if (t.position.y > target.transform.position.y)

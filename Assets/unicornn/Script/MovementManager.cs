@@ -54,6 +54,7 @@ public class MovementManager : MonoBehaviour
     {
         if (currentRound == 1)
         {
+            Debug.Log($"cr: {currentRound}");
             switch (actionType)
             {
                 case 0:
@@ -74,13 +75,16 @@ public class MovementManager : MonoBehaviour
                     Debug.Log(playerActions.Count);
                     break;
                 case 4:
-                    SkillManager.Instance.TriggerSkill(0);
+                    SkillManager.Instance.skills[0].Use(MovementManager.Instance.Player1.transform);
+
                     break;
 
 
                 default:
                     break;
             }
+            Debug.Log($"cr: {currentRound}");
+
         }
         else if (currentRound == 2)
         {
@@ -104,7 +108,8 @@ public class MovementManager : MonoBehaviour
                     Debug.Log(playerActions.Count);
                     break;
                 case 4:
-                    SkillManager.Instance.TriggerSkill(0);
+                    SkillManager.Instance.skills[0].Use(MovementManager.Instance.Player2.transform);
+
                     break;
                 default:
                     break;
