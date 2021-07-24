@@ -42,15 +42,31 @@ namespace SkillSystem
         {
             if (selectedMapSkill != -1 && Input.GetMouseButtonDown(0))
             {
-                RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, 1 << LayerMask.NameToLayer("Floor"));
-                if (hit.transform == null) return;
-                Debug.Log(hit.transform.name);
-                mapSkills[selectedMapSkill].MapUse(hit, angle);
+                //get target pos
+                RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, 0, 1 << (LayerMask.NameToLayer("Floor")));
+                if (hit.transform == null)
+                {
+                    Debug.Log("Target Position Outsided");
+                    selectedMapSkill = -1;
+                    return;
+                }
+                //check if the pos is blocked
+                RaycastHit2D[] block = Physics2D.RaycastAll(hit.transform.position, Vector2.zero);
+                for (int i = 0; i < block.Length; i++)
+                {
+                    if (block[i].transform.tag == "Player" || block[i].transform.tag == "Wall" || block[i].transform.tag == "Trap")
+                    {
+                        Debug.Log("Target Position Blocked");
+                        selectedMapSkill = -1;
+                        return;
+                    }
+                }
+                //Place Trap
+                mapSkills[selectedMapSkill].MapUse(hit.transform, angle);
                 selectedMapSkill = -1;
             }
-
-
         }
-    }
 
+
+    }
 }

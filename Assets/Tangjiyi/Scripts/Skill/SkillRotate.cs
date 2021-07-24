@@ -15,7 +15,7 @@ namespace SkillSystem
             this.angle = angle;
         }
 
-        public override void MapUse(RaycastHit2D hit,float angle)
+        public override void MapUse(Transform target,float angle)
         {
             throw new System.NotImplementedException();
         }
