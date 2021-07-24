@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
+
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -9,14 +11,18 @@ public class PlayerMovement : MonoBehaviour
     private bool isMoveDown = false;
     private bool isMoveLeft = false;
     private bool isMoveRight = false;
-    [SerializeField]
-    private float moveSpeed = 5.0f;
-    [SerializeField]
-    private float moveDistance = 60.0f;
+    [SerializeField]private float moveDuration = 1.0f;
+    [SerializeField]private float hitDuration = 0.2f;
+    [SerializeField]private float moveDistance = 60.0f;
 
     private Vector3 newPosition = new Vector3(0,0,0);
-    [SerializeField]
-    private LayerMask obstacleLayer;
+    private Vector3 hitPosition = new Vector3(0,0,0);
+    private Vector3 originPosition = new Vector3(0,0,0);
+    [SerializeField]private LayerMask obstacleLayer;
+    [SerializeField]private Ease playerMoveEase = Ease.Linear;
+    [SerializeField]private Ease playerHitEase = Ease.Linear;
+    [SerializeField]private Ease playerHitEase2 = Ease.Linear;
+
     void Awake(){
         controls = new InputManager();
         
@@ -53,30 +59,42 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         if(isMoveUp){
+            originPosition = transform.position;
             newPosition = transform.position + new Vector3(0,moveDistance,0);
+            hitPosition = transform.position + new Vector3(0,moveDistance*0.2f,0);
             if(!Physics2D.OverlapCircle(newPosition,0.2f,obstacleLayer))
-                transform.position = Vector3.MoveTowards(transform.position,newPosition,moveDistance);
+                transform.DOMove(newPosition,moveDuration).SetEase(playerMoveEase);
+                //transform.position = Vector3.MoveTowards(transform.position,newPosition,moveDistance);
 
             isMoveUp = false;
         }
         else if(isMoveDown){
+            originPosition = transform.position;
             newPosition = transform.position + new Vector3(0,-moveDistance,0);
+            hitPosition = transform.position + new Vector3(0,-moveDistance*0.2f,0);
             if(!Physics2D.OverlapCircle(newPosition,0.2f,obstacleLayer))
-                transform.position = Vector3.MoveTowards(transform.position,newPosition,moveDistance);
-            
+                transform.DOMove(newPosition,moveDuration).SetEase(playerMoveEase);
+            else {
+                DOTween.Sequence()
+                .Append(transform.DOMove(hitPosition,hitDuration).SetEase(playerHitEase))
+                .Append(transform.DOMove(originPosition,hitDuration).SetEase(playerHitEase2));
+            }
             isMoveDown = false;
         }
         else if(isMoveRight){
+            originPosition = transform.position;
             newPosition = transform.position + new Vector3(moveDistance,0,0);
+            hitPosition = transform.position + new Vector3(moveDistance*0.2f,0,0);
             if(!Physics2D.OverlapCircle(newPosition,0.2f,obstacleLayer))
-                transform.position = Vector3.MoveTowards(transform.position,newPosition,moveDistance);
-            
+                transform.DOMove(newPosition,moveDuration).SetEase(playerMoveEase);
             isMoveRight = false;
         }
         else if(isMoveLeft){
+            originPosition = transform.position;
             newPosition = transform.position + new Vector3(-moveDistance,0,0);
+            hitPosition = transform.position + new Vector3(-moveDistance*0.2f,0,0);
             if(!Physics2D.OverlapCircle(newPosition,0.2f,obstacleLayer))
-                transform.position = Vector3.MoveTowards(transform.position,newPosition,moveDistance);
+                transform.DOMove(newPosition,moveDuration).SetEase(playerMoveEase);
             
             isMoveLeft = false;
         }
