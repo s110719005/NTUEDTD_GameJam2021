@@ -1422,8 +1422,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playNextDelay: 2
-  Player1: {fileID: 869224747}
-  Player2: {fileID: 1172777495}
+  player1: {fileID: 869224747}
+  player2: {fileID: 1172777495}
   currentRound: 1
 --- !u!4 &1343565825
 Transform:
@@ -1459,6 +1459,11 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: playerHitWall
     clip: {fileID: 8300000, guid: e38de481774e0654f83c121ea010d05d, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: playerWalk
+    clip: {fileID: 8300000, guid: cbcd89763f8d7cb4486a41ab0f731678, type: 3}
     volume: 1
     pitch: 1
     source: {fileID: 0}

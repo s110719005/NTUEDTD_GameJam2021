@@ -6,6 +6,12 @@ namespace SkillSystem
 {
     public class SkillPlaceTrap : Skill
     {
+        private string trapPrefabName;
+        public SkillPlaceTrap(string trapPrefabName)
+        {
+            this.trapPrefabName = trapPrefabName;
+            needToMapSelectMap = true;
+        }
         List<Collider2D> traps = new List<Collider2D>();
         public SkillPlaceTrap()
         {
@@ -17,7 +23,7 @@ namespace SkillSystem
             Vector2 pos = hit.transform.position;
             pos.x = ((int)pos.x) + 0.5f;
             pos.y = ((int)pos.y) + 0.5f;
-            GameObject trap = Resources.Load<GameObject>("PushTrap");
+            GameObject trap = Resources.Load<GameObject>(trapPrefabName);
             trap.transform.position = pos;
             trap.transform.SetParent(Map.Instance.mapSections[Map.GetSectionGridPosFromWorldPos(pos)].transform);
             traps.Add(trap.GetComponent<Collider2D>());
