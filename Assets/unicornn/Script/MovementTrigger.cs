@@ -9,7 +9,11 @@ public class MovementTrigger : MonoBehaviour
     // Start is called before the first frame update
     
     public void TriggerAction(){
+        if(actionType!=20)
         FindObjectOfType<MovementManager>().AddAction(actionType);
+        else if(actionType==20)
+        FindObjectOfType<MovementManager>().StartAction();
+
     }
     void Start()
     {
