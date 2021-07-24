@@ -23,7 +23,26 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]private Ease playerHitEase = Ease.Linear;
     [SerializeField]private Ease playerHitEase2 = Ease.Linear;
 
+    //Animation
+    Animator _animator;
+    private int currentAnimationState;
+
+    private int animationIdle;
+    private int animationWalkLeft;
+    private int animationWalkRight;
+    private int animationWalkUp;
+    private int animationWalkDown;
+    private float playerWalkDelay;
+
     void Awake(){
+
+        _animator = GetComponent<Animator>();
+        animationIdle = Animator.StringToHash("Player_Idle");
+        animationWalkLeft = Animator.StringToHash("Player_Walk_Left");
+        animationWalkRight = Animator.StringToHash("Player_Walk_Right");
+        animationWalkUp = Animator.StringToHash("Player_Walk_Up");
+        animationWalkDown = Animator.StringToHash("Player_Walk_Down");
+
         controls = new InputManager();
         
             //角色移動
@@ -49,6 +68,16 @@ public class PlayerMovement : MonoBehaviour
     {
         controls.Player.Disable();
     }
+
+    void ChangeAnimationState(int newAnimationState)
+    {
+       if(newAnimationState == currentAnimationState) {
+            return; //一樣的話就不重新開始播ㄌ
+        }
+        _animator.Play(newAnimationState);
+        
+        currentAnimationState = newAnimationState;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -62,13 +91,19 @@ public class PlayerMovement : MonoBehaviour
             originPosition = transform.position;
             newPosition = transform.position + new Vector3(0,moveDistance,0);
             hitPosition = transform.position + new Vector3(0,moveDistance*0.2f,0);
-            if(!Physics2D.OverlapCircle(newPosition,0.2f,obstacleLayer))
+            if(!Physics2D.OverlapCircle(newPosition,0.2f,obstacleLayer)){
                 transform.DOMove(newPosition,moveDuration).SetEase(playerMoveEase);
+                ChangeAnimationState(animationWalkUp);
+                Invoke("PlayIdleAnimation",moveDuration);//走路的動畫播一段時間才切回idle
+            }
                 //transform.position = Vector3.MoveTowards(transform.position,newPosition,moveDistance);
             else {
                 DOTween.Sequence()
                 .Append(transform.DOMove(hitPosition,hitDuration).SetEase(playerHitEase))
                 .Append(transform.DOMove(originPosition,hitDuration).SetEase(playerHitEase2));
+                FindObjectOfType<AudioManager>().Play("playerHitWall");
+                ChangeAnimationState(animationWalkUp);
+                Invoke("PlayIdleAnimation",hitDuration);//走路的動畫播一段時間才切回idle
             }
             isMoveUp = false;
         }
@@ -76,13 +111,18 @@ public class PlayerMovement : MonoBehaviour
             originPosition = transform.position;
             newPosition = transform.position + new Vector3(0,-moveDistance,0);
             hitPosition = transform.position + new Vector3(0,-moveDistance*0.2f,0);
-            if(!Physics2D.OverlapCircle(newPosition,0.2f,obstacleLayer))
+            if(!Physics2D.OverlapCircle(newPosition,0.2f,obstacleLayer)){
                 transform.DOMove(newPosition,moveDuration).SetEase(playerMoveEase);
+                ChangeAnimationState(animationWalkDown);
+                Invoke("PlayIdleAnimation",moveDuration);//走路的動畫播一段時間才切回idle
+            }
             else {
                 DOTween.Sequence()
                 .Append(transform.DOMove(hitPosition,hitDuration).SetEase(playerHitEase))
                 .Append(transform.DOMove(originPosition,hitDuration).SetEase(playerHitEase2));
                 FindObjectOfType<AudioManager>().Play("playerHitWall");
+                ChangeAnimationState(animationWalkDown);
+                Invoke("PlayIdleAnimation",hitDuration);
             }
             isMoveDown = false;
         }
@@ -90,12 +130,18 @@ public class PlayerMovement : MonoBehaviour
             originPosition = transform.position;
             newPosition = transform.position + new Vector3(moveDistance,0,0);
             hitPosition = transform.position + new Vector3(moveDistance*0.2f,0,0);
-            if(!Physics2D.OverlapCircle(newPosition,0.2f,obstacleLayer))
+            if(!Physics2D.OverlapCircle(newPosition,0.2f,obstacleLayer)){
                 transform.DOMove(newPosition,moveDuration).SetEase(playerMoveEase);
+                ChangeAnimationState(animationWalkRight);
+                Invoke("PlayIdleAnimation",moveDuration);//走路的動畫播一段時間才切回idle
+            }
             else {
                 DOTween.Sequence()
                 .Append(transform.DOMove(hitPosition,hitDuration).SetEase(playerHitEase))
                 .Append(transform.DOMove(originPosition,hitDuration).SetEase(playerHitEase2));
+                FindObjectOfType<AudioManager>().Play("playerHitWall");
+                ChangeAnimationState(animationWalkRight);
+                Invoke("PlayIdleAnimation",hitDuration);//走路的動畫播一段時間才切回idle
             }
             isMoveRight = false;
         }
@@ -103,16 +149,26 @@ public class PlayerMovement : MonoBehaviour
             originPosition = transform.position;
             newPosition = transform.position + new Vector3(-moveDistance,0,0);
             hitPosition = transform.position + new Vector3(-moveDistance*0.2f,0,0);
-            if(!Physics2D.OverlapCircle(newPosition,0.2f,obstacleLayer))
+            if(!Physics2D.OverlapCircle(newPosition,0.2f,obstacleLayer)){
                 transform.DOMove(newPosition,moveDuration).SetEase(playerMoveEase);
+                ChangeAnimationState(animationWalkLeft);
+                Invoke("PlayIdleAnimation",moveDuration);//走路的動畫播一段時間才切回idle
+            }
             else {
                 DOTween.Sequence()
                 .Append(transform.DOMove(hitPosition,hitDuration).SetEase(playerHitEase))
                 .Append(transform.DOMove(originPosition,hitDuration).SetEase(playerHitEase2));
+                FindObjectOfType<AudioManager>().Play("playerHitWall");
+                ChangeAnimationState(animationWalkLeft);
+                Invoke("PlayIdleAnimation",hitDuration);//走路的動畫播一段時間才切回idle
             }
             
             isMoveLeft = false;
         }
+    }
+
+    void PlayIdleAnimation(){
+        ChangeAnimationState(animationIdle);
     }
     public void SetIsMoveUp(bool isUp){
         isMoveUp = isUp;
