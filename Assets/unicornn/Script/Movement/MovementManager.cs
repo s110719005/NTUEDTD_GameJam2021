@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,17 +19,25 @@ public class MovementManager : MonoBehaviour
     }
 
     private Queue<int> playerActions;
+    public delegate void OnRoundStart();
+    public event OnRoundStart OnRoundStartEvent;
     private bool canPlayNext = false;
-    private float playNextTimer = 0;
+    private float playNextTimer = 2f;
     private bool openPlayNextTimer = false;
     private int action;
     private bool isStart = false;
     private int currentAction;
     [SerializeField]
     private float playNextDelay = 2.0f;
-    public GameObject Player1;
-    public GameObject Player2;
+    [SerializeField]
+    private GameObject player1;
+    [SerializeField]
+    private GameObject player2;
+    public GameObject Player1 { get => player1; }
+    public GameObject Player2 { get => player2; }
     public int currentRound = 1;
+    private bool excutingRound = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +45,7 @@ public class MovementManager : MonoBehaviour
     }
     public void AddAction(int actionType)
     {
+        if (excutingRound) return;
         playerActions.Enqueue(actionType);
         Debug.Log(playerActions.Count);
         //Action_MoveUp();
@@ -123,10 +132,10 @@ public class MovementManager : MonoBehaviour
                     SkillManager.Instance.skills[0].Use(MovementManager.Instance.Player2.transform);
                     break;
                 case 5:
-                    SkillManager.Instance.skills[0].Use(MovementManager.Instance.Player2.transform);
+                    SkillManager.Instance.skills[1].Use(MovementManager.Instance.Player2.transform);
                     break;
                 case 6:
-                    SkillManager.Instance.skills[0].Use(MovementManager.Instance.Player2.transform);
+                    SkillManager.Instance.skills[2].Use(MovementManager.Instance.Player2.transform);
                     break;
                 default:
                     break;
@@ -134,44 +143,75 @@ public class MovementManager : MonoBehaviour
         }
 
     }
-
     // Update is called once per frame
     void Update()
     {
-        if (playerActions.Count != 0)
+        //p1 Start->Btn
+        //p1 Run->time
+        //p2 Start->Btn
+        //p2 Run->time
+
+        if (excutingRound)
         {
-            if (isStart)
+            if (playNextTimer >= playNextDelay)
             {
-                isStart = false;
-                openPlayNextTimer = true;
-                currentAction = playerActions.Dequeue();
-                ActionSwitch(currentAction);
-            }
-            else if (canPlayNext)
-            {
-                canPlayNext = false;
-                currentAction = playerActions.Dequeue();
-                ActionSwitch(currentAction);
-                if (playerActions.Count == 0)
+                if (playerActions.Count != 0)
                 {
-                    if (currentRound == 1) currentRound = 2;
-                    else currentRound = 1;
+
+                    ActionSwitch(playerActions.Dequeue());
+                    playNextTimer = 0;
+                }
+                else
+                {
+                    excutingRound = false;
+                    currentRound = currentRound == 1 ? 2 : 1;
                 }
             }
-        }
-        else
-        {
-            playNextTimer = 0;
-            openPlayNextTimer = false;
-        }
-        if (openPlayNextTimer)
-        {
             playNextTimer += Time.deltaTime;
         }
-        if (playNextTimer >= playNextDelay)
+
+        if (isStart)
         {
-            playNextTimer = 0;
-            canPlayNext = true;
+            isStart = false;
+            OnRoundStartEvent?.Invoke();
+            excutingRound = true;
         }
+
+
+        // if (playerActions.Count != 0)
+        // {
+        //     if (isStart)
+        //     {
+        //         isStart = false;
+        //         openPlayNextTimer = true;
+        //         currentAction = playerActions.Dequeue();
+        //         ActionSwitch(currentAction);
+        //     }
+        //     else if (canPlayNext)
+        //     {
+        //         canPlayNext = false;
+        //         currentAction = playerActions.Dequeue();
+        //         ActionSwitch(currentAction);
+        //         if (playerActions.Count == 0)
+        //         {
+        //             if (currentRound == 1) currentRound = 2;
+        //             else currentRound = 1;
+        //         }
+        //     }
+        // }
+        // else
+        // {
+        //     playNextTimer = 0;
+        //     openPlayNextTimer = false;
+        // }
+        // if (openPlayNextTimer)
+        // {
+        //     playNextTimer += Time.deltaTime;
+        // }
+        // if (playNextTimer >= playNextDelay)
+        // {
+        //     playNextTimer = 0;
+        //     canPlayNext = true;
+        // }
     }
 }
