@@ -58,8 +58,7 @@ AnimatorState:
   m_Name: Player_Walk_Left
   m_Speed: 1
   m_CycleOffset: 0
-  m_Transitions:
-  - {fileID: -2906266912442116023}
+  m_Transitions: []
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
@@ -69,7 +68,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 0}
+  m_Motion: {fileID: 7400000, guid: 7fb4586b5cf9ebf4eb669b9dddfc6520, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -259,8 +258,7 @@ AnimatorState:
   m_Name: Player_Idle
   m_Speed: 1
   m_CycleOffset: 0
-  m_Transitions:
-  - {fileID: 3973330480619945460}
+  m_Transitions: []
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
