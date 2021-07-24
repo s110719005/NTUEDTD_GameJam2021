@@ -44,7 +44,9 @@ public class MovementManager : MonoBehaviour
     public void AddAction(int actionType)
     {
         if (excutingRound) return;
+        if(playerActions.Count==6) return;
         playerActions.Enqueue(actionType);
+        FindObjectOfType<UIManager>().SetPreviewSprite(playerActions.Count-1,actionType);//設定UI預覽
         Debug.Log(playerActions.Count);
         //Action_MoveUp();
     }
@@ -55,6 +57,7 @@ public class MovementManager : MonoBehaviour
     public void ClearAction()
     {
         playerActions.Clear();
+        FindObjectOfType<UIManager>().ResetPreviewSprite();//清除UI預覽
         Debug.Log(playerActions.Count);
         Debug.Log("Queue Clear!");
     }
@@ -154,6 +157,7 @@ public class MovementManager : MonoBehaviour
                 if (playerActions.Count != 0)
                 {
 
+                    FindObjectOfType<UIManager>().ExecutePreviewSprite(6-playerActions.Count);//執行動作也處理UI預覽
                     ActionSwitch(playerActions.Dequeue());
                     playNextTimer = 0;
                 }
@@ -163,7 +167,7 @@ public class MovementManager : MonoBehaviour
                     excutingRound = false;
                     currentRound = currentRound == 1 ? 2 : 1;
                     OnRoundStartEvent?.Invoke();
-                    FindObjectOfType<UIManager>().OpenPanel();
+                    //FindObjectOfType<UIManager>().OpenPanel();
 
                 }
             }

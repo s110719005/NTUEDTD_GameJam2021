@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/unicornn/StartScene.unity
+    path: Assets/unicornn/Scene/StartScene.unity
     guid: f186b30d365d85b488e2aff670dd3e0f
   - enabled: 0
     path: 
