@@ -165,6 +165,8 @@ public class MovementManager : MonoBehaviour
                     OnRoundStartEvent?.Invoke();
                     excutingRound = false;
                     currentRound = currentRound == 1 ? 2 : 1;
+                    FindObjectOfType<UIManager>().OpenPanel();
+
                 }
             }
             playNextTimer += Time.deltaTime;

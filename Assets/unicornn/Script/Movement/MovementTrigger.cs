@@ -10,8 +10,13 @@ public class MovementTrigger : MonoBehaviour
 
     public void TriggerAction()
     {
-        if (actionType == 20)
+        if (actionType == 20){
+
+            FindObjectOfType<UIManager>().ClosePanel();
             FindObjectOfType<MovementManager>().StartAction();
+        }
+        else if(actionType == 19)
+            FindObjectOfType<MovementManager>().ClearAction();
         else
             FindObjectOfType<MovementManager>().AddAction(actionType);
 
