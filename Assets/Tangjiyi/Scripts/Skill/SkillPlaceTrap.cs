@@ -17,7 +17,7 @@ namespace SkillSystem
 
         public override void MapUse(Transform target,float angle)
         {
-            //Debug.Log(trapPrefabName);
+            Debug.Log(trapPrefabName);
             Vector2 pos = target.position;
             pos.x = ((int)pos.x) + 0.5f;
             pos.y = ((int)pos.y) + 0.5f;
@@ -44,6 +44,15 @@ namespace SkillSystem
         public override void Use(Transform t)
         {
             throw new System.NotImplementedException();
+        }
+
+        public override void Reset()
+        {
+            foreach (var item in traps)
+            {
+                GameObject.Destroy(item.gameObject);
+            }
+            traps.Clear();
         }
     }
 }

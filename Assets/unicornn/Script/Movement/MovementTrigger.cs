@@ -12,13 +12,13 @@ public class MovementTrigger : MonoBehaviour
     {
         if (actionType == 20){
 
-            //FindObjectOfType<UIManager>().ClosePanel();
-            FindObjectOfType<MovementManager>().StartAction();
+            FindObjectOfType<UIManager>().ClosePanel();
+            MovementManager.Instance.StartAction();
         }
         else if(actionType == 19)
-            FindObjectOfType<MovementManager>().ClearAction();
+            MovementManager.Instance.ClearAction();
         else
-            FindObjectOfType<MovementManager>().AddAction(actionType);
+            MovementManager.Instance.AddAction(actionType);
 
     }
 }

@@ -20,6 +20,11 @@ namespace SkillSystem
             throw new System.NotImplementedException();
         }
 
+        public override void Reset()
+        {
+            throw new System.NotImplementedException();
+        }
+
         public override void Use(Transform t)
         {
             RaycastHit2D target = Physics2D.Raycast(t.position, Vector2.zero, 1, 1 << LayerMask.NameToLayer("Floor"));

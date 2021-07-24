@@ -5,6 +5,7 @@ namespace SkillSystem
 {
     public class TrapSkillUITrigger : MonoBehaviour
     {
+
         public int index = 0;
         public enum Direction
         {
@@ -26,6 +27,8 @@ namespace SkillSystem
             }
 
             SkillManager.Instance.UseMapSkill(index, (float)direction);
+
+
         }
 
         void OnDisable()

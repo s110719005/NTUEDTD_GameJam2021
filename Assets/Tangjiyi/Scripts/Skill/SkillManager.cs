@@ -27,6 +27,13 @@ namespace SkillSystem
             selectedMapSkill = index;
             this.angle = angle;
         }
+        public void ResetMapSkills()
+        {
+            foreach (var item in mapSkills)
+            {
+                item.Reset();
+            }
+        }
         public List<Skill> skills = new List<Skill>();
         public List<Skill> mapSkills = new List<Skill>();
         private void Start()
@@ -42,6 +49,7 @@ namespace SkillSystem
         {
             if (selectedMapSkill != -1 && Input.GetMouseButtonDown(0))
             {
+                Debug.Log("ClK");
                 //get target pos
                 RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, 0, 1 << (LayerMask.NameToLayer("Floor")));
                 if (hit.transform == null)
@@ -60,6 +68,24 @@ namespace SkillSystem
                         selectedMapSkill = -1;
                         return;
                     }
+                }
+                //this is bad but..angle.
+                int actionId = 7;
+                if (selectedMapSkill == 1) actionId = 11;
+                switch (angle)
+                {
+                    case 0:
+                        MovementManager.Instance.AddAction(actionId);
+                        break;
+                    case 180:
+                        MovementManager.Instance.AddAction(actionId + 1);
+                        break;
+                    case -90:
+                        MovementManager.Instance.AddAction(actionId + 2);
+                        break;
+                    case 90:
+                        MovementManager.Instance.AddAction(actionId + 3);
+                        break;
                 }
                 //Place Trap
                 mapSkills[selectedMapSkill].MapUse(hit.transform, angle);

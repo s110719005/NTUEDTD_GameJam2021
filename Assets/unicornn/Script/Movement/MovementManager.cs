@@ -44,9 +44,9 @@ public class MovementManager : MonoBehaviour
     public void AddAction(int actionType)
     {
         if (excutingRound) return;
-        if(playerActions.Count==6) return;
+        if (playerActions.Count == 6) return;
         playerActions.Enqueue(actionType);
-        FindObjectOfType<UIManager>().SetPreviewSprite(playerActions.Count-1,actionType);//設定UI預覽
+        FindObjectOfType<UIManager>().SetPreviewSprite(playerActions.Count - 1, actionType);//設定UI預覽
         Debug.Log(playerActions.Count);
         //Action_MoveUp();
     }
@@ -57,6 +57,7 @@ public class MovementManager : MonoBehaviour
     public void ClearAction()
     {
         playerActions.Clear();
+        SkillManager.Instance.ResetMapSkills();
         FindObjectOfType<UIManager>().ResetPreviewSprite();//清除UI預覽
         Debug.Log(playerActions.Count);
         Debug.Log("Queue Clear!");
@@ -100,6 +101,7 @@ public class MovementManager : MonoBehaviour
                 case 6:
                     SkillManager.Instance.skills[2].Use(MovementManager.Instance.Player1.transform);
                     break;
+
                 default:
                     break;
             }
@@ -136,6 +138,33 @@ public class MovementManager : MonoBehaviour
                 case 6:
                     SkillManager.Instance.skills[2].Use(MovementManager.Instance.Player2.transform);
                     break;
+
+                case 7:
+                    playNextDelay = 0;//up
+                    break;
+                case 8:
+                    playNextDelay = 0;//down
+                    break;
+                case 9:
+                    playNextDelay = 0;//right
+                    break;
+                case 10:
+                    playNextDelay = 0;//left
+                    break;
+
+                case 11:
+                    playNextDelay = 0;//same above
+                    break;
+                case 12:
+                    playNextDelay = 0;
+                    break;
+                case 13:
+                    playNextDelay = 0;
+                    break;
+                case 14:
+                    playNextDelay = 0;
+                    break;
+
                 default:
                     break;
             }
@@ -157,7 +186,7 @@ public class MovementManager : MonoBehaviour
                 if (playerActions.Count != 0)
                 {
 
-                    FindObjectOfType<UIManager>().ExecutePreviewSprite(6-playerActions.Count);//執行動作也處理UI預覽
+                    FindObjectOfType<UIManager>().ExecutePreviewSprite(6 - playerActions.Count);//執行動作也處理UI預覽
                     ActionSwitch(playerActions.Dequeue());
                     playNextTimer = 0;
                 }

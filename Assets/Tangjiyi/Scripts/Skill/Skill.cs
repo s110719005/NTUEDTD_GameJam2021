@@ -8,6 +8,8 @@ namespace SkillSystem
     {
         public abstract void Use(Transform t);
         public abstract void MapUse(Transform target,float angle);
+
+        public abstract void Reset();
     }
 
 }
