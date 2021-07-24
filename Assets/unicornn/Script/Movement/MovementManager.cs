@@ -21,10 +21,7 @@ public class MovementManager : MonoBehaviour
     private Queue<int> playerActions;
     public delegate void OnRoundStart();
     public event OnRoundStart OnRoundStartEvent;
-    private bool canPlayNext = false;
     private float playNextTimer = 2f;
-    private bool openPlayNextTimer = false;
-    private int action;
     private bool isStart = false;
     private int currentAction;
     [SerializeField]
@@ -37,6 +34,7 @@ public class MovementManager : MonoBehaviour
     public GameObject Player2 { get => player2; }
     public int currentRound = 1;
     private bool excutingRound = false;
+    public bool ExcutingRound { get => excutingRound; }
 
     // Start is called before the first frame update
     void Start()
@@ -162,9 +160,9 @@ public class MovementManager : MonoBehaviour
                 else
                 {
                     Debug.Log($"Player{currentRound}'s Order Done.");
-                    OnRoundStartEvent?.Invoke();
                     excutingRound = false;
                     currentRound = currentRound == 1 ? 2 : 1;
+                    OnRoundStartEvent?.Invoke();
                     FindObjectOfType<UIManager>().OpenPanel();
 
                 }
@@ -174,7 +172,7 @@ public class MovementManager : MonoBehaviour
 
         if (isStart)
         {
-            Debug.Log($"Excute Player{currentRound}'s Order.");
+            Debug.Log($"Start excuting Player{currentRound}'s Order.");
             isStart = false;
             excutingRound = true;
         }

@@ -19,6 +19,12 @@ namespace SkillSystem
 
         private void buttonCallBack(int index, Direction direction)
         {
+            if (MovementManager.Instance.ExcutingRound)
+            {
+                Debug.Log("You Cannot do this during order-excuting stage");
+                return;
+            }
+
             SkillManager.Instance.UseMapSkill(index, (float)direction);
         }
 
