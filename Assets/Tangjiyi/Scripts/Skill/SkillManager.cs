@@ -28,10 +28,6 @@ namespace SkillSystem
             skills.Add(new SkillRotate(180));
             skills.Add(new SkillRotate(-90));
         }
-        public void TriggerSkill(int index)
-        {
-            selectedSkill = index;
-        }
 
         private void Update()
         {

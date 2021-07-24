@@ -76,8 +76,14 @@ public class MovementManager : MonoBehaviour
                     break;
                 case 4:
                     SkillManager.Instance.skills[0].Use(MovementManager.Instance.Player1.transform);
-
                     break;
+                case 5:
+                    SkillManager.Instance.skills[0].Use(MovementManager.Instance.Player1.transform);
+                    break;
+                case 6:
+                    SkillManager.Instance.skills[0].Use(MovementManager.Instance.Player1.transform);
+                    break;
+
 
 
                 default:
@@ -109,7 +115,12 @@ public class MovementManager : MonoBehaviour
                     break;
                 case 4:
                     SkillManager.Instance.skills[0].Use(MovementManager.Instance.Player2.transform);
-
+                    break;
+                case 5:
+                    SkillManager.Instance.skills[0].Use(MovementManager.Instance.Player2.transform);
+                    break;
+                case 6:
+                    SkillManager.Instance.skills[0].Use(MovementManager.Instance.Player2.transform);
                     break;
                 default:
                     break;
