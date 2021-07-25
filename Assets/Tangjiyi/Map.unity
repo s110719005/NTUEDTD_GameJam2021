@@ -30663,6 +30663,11 @@ MonoBehaviour:
     volume: 0.334
     pitch: 0.61
     source: {fileID: 0}
+  - name: win
+    clip: {fileID: 8300000, guid: bd7f21db342c01442a20ad632635655c, type: 3}
+    volume: 0.334
+    pitch: 0.61
+    source: {fileID: 0}
 --- !u!4 &1934600569
 Transform:
   m_ObjectHideFlags: 0
