@@ -35,6 +35,7 @@ public class MovementManager : MonoBehaviour
     public int currentRound = 1;
     private bool excutingRound = false;
     public bool ExcutingRound { get => excutingRound; }
+    private int uiCount = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -186,7 +187,8 @@ public class MovementManager : MonoBehaviour
                 if (playerActions.Count != 0)
                 {
 
-                    FindObjectOfType<UIManager>().ExecutePreviewSprite(6 - playerActions.Count);//執行動作也處理UI預覽
+                    FindObjectOfType<UIManager>().ExecutePreviewSprite(uiCount);//執行動作也處理UI預覽
+                    uiCount++;
                     ActionSwitch(playerActions.Dequeue());
                     playNextTimer = 0;
                 }
@@ -197,6 +199,7 @@ public class MovementManager : MonoBehaviour
                     currentRound = currentRound == 1 ? 2 : 1;
                     OnRoundStartEvent?.Invoke();
                     FindObjectOfType<UIManager>().OpenPanel();
+                    uiCount = 0;
 
                 }
             }
