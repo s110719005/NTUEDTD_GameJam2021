@@ -32,10 +32,10 @@ public class UIManager : MonoBehaviour
     }
 
     public void ClosePanel(){
-        buttonPanel.DOAnchorPosX(-1200,buttonPanelInDuration,true).SetEase(buttonPanelEaseOut);
+        buttonPanel.DOAnchorPosX(-1900,buttonPanelInDuration,true).SetEase(buttonPanelEaseOut);
     }
     public void OpenPanel(){
-        buttonPanel.DOAnchorPosX(-700,buttonPanelInDuration,true).SetEase(buttonPanelEaseIn);
+        buttonPanel.DOAnchorPosX(0,buttonPanelInDuration,true).SetEase(buttonPanelEaseIn);
 
     }
     public void SetPreviewSprite(int index,int type){
