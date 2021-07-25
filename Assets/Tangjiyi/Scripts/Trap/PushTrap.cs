@@ -15,7 +15,8 @@ public class PushTrap : Trap
         float dist = Vector2.Distance(transform.position, target.point);
         if (!(dist <= 1))
         {
-            other.transform.DOMove(target.point + target.normal / 2, 1).SetEase(Ease.Linear);
+            MovementManager.Instance.ForceAddDelay(dist / 4);
+            other.transform.DOMove(target.point + target.normal / 2, dist / 4).SetEase(Ease.Linear);
             // Debug.Log("OH");
         }
         // other.transform.position = target.point + target.normal / 2;
