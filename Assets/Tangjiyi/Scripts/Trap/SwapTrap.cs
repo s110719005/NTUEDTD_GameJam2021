@@ -14,6 +14,7 @@ public class SwapTrap : Trap
 
         Map.Instance.SwapSectionByGridPos(section.gridPos, section.gridPos + new Vector2Int((int)transform.up.x, (int)transform.up.y));
         other.transform.parent = null;
+        MovementManager.Instance.ForceAddDelay(1f);
         Destroy(gameObject);
     }
 }

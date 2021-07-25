@@ -62,7 +62,7 @@ namespace SkillSystem
                 RaycastHit2D[] block = Physics2D.RaycastAll(hit.transform.position, Vector2.zero);
                 for (int i = 0; i < block.Length; i++)
                 {
-                    if (block[i].transform.tag == "Player" || block[i].transform.tag == "Wall" || block[i].transform.tag == "Trap")
+                    if (block[i].transform.tag == "player1" || block[i].transform.tag == "player2" || block[i].transform.tag == "Wall" || block[i].transform.tag == "Trap")
                     {
                         Debug.Log("Target Position Blocked");
                         selectedMapSkill = -1;

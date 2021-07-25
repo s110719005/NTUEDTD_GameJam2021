@@ -1,4 +1,4 @@
-using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,11 +25,14 @@ public class MovementManager : MonoBehaviour
     private Queue<int> playerActions;
     public delegate void OnRoundStart();
     public event OnRoundStart OnRoundStartEvent;
-    private float playNextTimer = 2f;
+
+    private float gameStartDelay = 1;
+    public float GameStartDelay { get => gameStartDelay; }
+    private float playNextTimer = 1.6f;
     private bool isStart = false;
     private int currentAction;
     [SerializeField]
-    private float playNextDelay = 2.0f;
+    private float playNextDelay = 1.6f;
     [SerializeField]
     private GameObject player1;
     [SerializeField]
@@ -72,10 +75,12 @@ public class MovementManager : MonoBehaviour
     {
         FindObjectOfType<PlayerMovement>().SetIsMoveUp(true);
     }
-
+    public void ForceAddDelay(float addtime)
+    {
+        playNextDelay += addtime;
+    }
     void ActionSwitch(int actionType)
     {
-        playNextDelay = 2f;
         if (currentRound == 1)
         {
             Debug.Log($"cr: {currentRound}");
@@ -221,6 +226,7 @@ public class MovementManager : MonoBehaviour
 
                     FindObjectOfType<UIManager>().ExecutePreviewSprite(uiCount);//執行動作也處理UI預覽
                     uiCount++;
+                    playNextDelay = 1.6f;//reset delay
                     ActionSwitch(playerActions.Dequeue());
                     playNextTimer = 0;
                 }

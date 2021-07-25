@@ -15,7 +15,7 @@ namespace SkillSystem
         }
         List<Collider2D> traps = new List<Collider2D>();
 
-        public override void MapUse(Transform target,float angle)
+        public override void MapUse(Transform target, float angle)
         {
             Debug.Log(trapPrefabName);
             Vector2 pos = target.position;
@@ -24,7 +24,7 @@ namespace SkillSystem
             GameObject trap = GameObject.Instantiate(
                 Resources.Load<GameObject>(trapPrefabName)
                 , pos
-                , Quaternion.Euler(0,0,angle)
+                , Quaternion.Euler(0, 0, angle)
                 , Map.Instance.mapSections[Map.GetSectionGridPosFromWorldPos(pos)].transform
             );
             // trap.transform.position = pos;
@@ -38,6 +38,9 @@ namespace SkillSystem
             for (int i = 0; i < traps.Count; i++)
             {
                 traps[i].enabled = true;
+                var renderer = traps[i].GetComponentInChildren<SpriteRenderer>();
+                if (renderer == null) return;
+                renderer.color = Color.white;
             }
             traps.Clear();
         }
