@@ -5304,9 +5304,9 @@ MonoBehaviour:
   - actionName: Walk_Left
     btnImage: {fileID: 21300000, guid: 4d8b19e0a90fb7b45ac5d0fae7dc1580, type: 3}
   - actionName: Rotate90_ccw
-    btnImage: {fileID: 21300000, guid: f5fef8b2b3e42f14e928d83ccd950511, type: 3}
+    btnImage: {fileID: 21300000, guid: f189e676feeebf647968788a2ae9329d, type: 3}
   - actionName: Rotate90_cw
-    btnImage: {fileID: 21300000, guid: a0263ef5164fe864986146d00f4f11b6, type: 3}
+    btnImage: {fileID: 21300000, guid: dde517af2f9880146b6aa5c2f9d3394e, type: 3}
   - actionName: Rotate180
     btnImage: {fileID: 21300000, guid: df7909b05508ecd4fb62fb65d1f54410, type: 3}
   - actionName: Arrow_Up
