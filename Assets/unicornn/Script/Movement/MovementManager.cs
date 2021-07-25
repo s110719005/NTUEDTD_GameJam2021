@@ -13,13 +13,13 @@ public class MovementManager : MonoBehaviour
     private void Awake()
     {
         //instance = MovementManager.Instance;
-        instance = this;
-        //if (instance == null) instance = this as MovementManager;
+        //instance = this;
+        if (instance == null) instance = this;
         // var players = FindObjectsOfType<PlayerMovement>();
         // MovementManager.Instance.player1 = players[0].gameObject;
         // MovementManager.Instance.player2 = players[1].gameObject;
         //if (instance == this) DontDestroyOnLoad(this);
-        //else DestroyImmediate(this);
+        else DestroyImmediate(this);
     }
 
     private Queue<int> playerActions;
@@ -42,7 +42,7 @@ public class MovementManager : MonoBehaviour
     private int uiCount = 0;
 
     // Start is called before the first frame update
-    
+
     void Start()
     {
         playerActions = new Queue<int>();
@@ -79,7 +79,7 @@ public class MovementManager : MonoBehaviour
         if (currentRound == 1)
         {
             Debug.Log($"cr: {currentRound}");
-            if(Player1==null||Player2==null)
+            if (Player1 == null || Player2 == null)
                 return;
             switch (actionType)
             {
@@ -108,6 +108,31 @@ public class MovementManager : MonoBehaviour
                     break;
                 case 6:
                     SkillManager.Instance.skills[2].Use(MovementManager.Instance.Player1.transform);
+                    break;
+                case 7:
+                    playNextDelay = 0.5f;//up
+                    break;
+                case 8:
+                    playNextDelay = 0.5f;//down
+                    break;
+                case 9:
+                    playNextDelay = 0.5f;//right
+                    break;
+                case 10:
+                    playNextDelay = 0.5f;//left
+                    break;
+
+                case 11:
+                    playNextDelay = 0.5f;//same above
+                    break;
+                case 12:
+                    playNextDelay = 0.5f;
+                    break;
+                case 13:
+                    playNextDelay = 0.5f;
+                    break;
+                case 14:
+                    playNextDelay = 0.5f;
                     break;
 
                 default:
@@ -148,29 +173,29 @@ public class MovementManager : MonoBehaviour
                     break;
 
                 case 7:
-                    playNextDelay = 0;//up
+                    playNextDelay = 0.5f;//up
                     break;
                 case 8:
-                    playNextDelay = 0;//down
+                    playNextDelay = 0.5f;//down
                     break;
                 case 9:
-                    playNextDelay = 0;//right
+                    playNextDelay = 0.5f;//right
                     break;
                 case 10:
-                    playNextDelay = 0;//left
+                    playNextDelay = 0.5f;//left
                     break;
 
                 case 11:
-                    playNextDelay = 0;//same above
+                    playNextDelay = 0.5f;//same above
                     break;
                 case 12:
-                    playNextDelay = 0;
+                    playNextDelay = 0.5f;
                     break;
                 case 13:
-                    playNextDelay = 0;
+                    playNextDelay = 0.5f;
                     break;
                 case 14:
-                    playNextDelay = 0;
+                    playNextDelay = 0.5f;
                     break;
 
                 default:

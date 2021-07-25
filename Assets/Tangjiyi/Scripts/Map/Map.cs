@@ -13,10 +13,8 @@ namespace MapSystem
         }
         private void Awake()
         {
-            instance = Map.Instance;
-            if (instance == null) instance = this as Map;
-            //if (instance == this) DontDestroyOnLoad(this);
-            else DestroyImmediate(this);
+            if (instance == null) instance = this;
+            else DestroyImmediate(gameObject);
         }
         //感謝學長大力支援!!
         public Dictionary<Vector2Int, MapSection> mapSections = new Dictionary<Vector2Int, MapSection>();
