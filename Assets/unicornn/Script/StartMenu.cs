@@ -11,4 +11,8 @@ public class StartMenu : MonoBehaviour
         Application.Quit();
         Debug.Log("Exit game!");
     }
+    public void ReloadGame(){
+        Scene scene = SceneManager.GetActiveScene(); 
+        SceneManager.LoadScene(scene.name);
+    }
 }

@@ -8,6 +8,9 @@ public class UIManager : MonoBehaviour
 {
     
     [SerializeField]private RectTransform buttonPanel; //-1200 - -700
+    [SerializeField]private RectTransform winPanelTopP1; 
+    [SerializeField]private RectTransform winPanelTopP2; 
+    [SerializeField]private RectTransform winPanelBottom; 
     [SerializeField]private float buttonPanelInDuration = 1.0f;
     [SerializeField]private Ease buttonPanelEaseIn;
     [SerializeField]private Ease buttonPanelEaseOut;
@@ -32,10 +35,10 @@ public class UIManager : MonoBehaviour
     }
 
     public void ClosePanel(){
-        buttonPanel.DOAnchorPosX(-1900,buttonPanelInDuration,true).SetEase(buttonPanelEaseOut);
+        buttonPanel.DOAnchorPosY(-700,buttonPanelInDuration,true).SetEase(buttonPanelEaseOut);
     }
     public void OpenPanel(){
-        buttonPanel.DOAnchorPosX(0,buttonPanelInDuration,true).SetEase(buttonPanelEaseIn);
+        buttonPanel.DOAnchorPosY(-440,buttonPanelInDuration,true).SetEase(buttonPanelEaseIn);
 
     }
     public void SetPreviewSprite(int index,int type){
@@ -50,5 +53,17 @@ public class UIManager : MonoBehaviour
     }
     public void ExecutePreviewSprite(int index){
         actionPreview[index].enabled = false;
+    }
+    public void WinP1(){
+        winPanelTopP1.DOAnchorPosY(0,buttonPanelInDuration,true).SetEase(buttonPanelEaseOut);
+        winPanelBottom.DOAnchorPosY(0,buttonPanelInDuration,true).SetEase(buttonPanelEaseOut);
+        buttonPanel.DOAnchorPosY(-700,buttonPanelInDuration,true).SetEase(buttonPanelEaseOut);
+
+    }
+    public void WinP2(){
+        winPanelTopP2.DOAnchorPosY(0,buttonPanelInDuration,true).SetEase(buttonPanelEaseOut);
+        winPanelBottom.DOAnchorPosY(0,buttonPanelInDuration,true).SetEase(buttonPanelEaseOut);
+        buttonPanel.DOAnchorPosY(-700,buttonPanelInDuration,true).SetEase(buttonPanelEaseOut);
+
     }
 }
