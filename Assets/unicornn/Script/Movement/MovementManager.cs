@@ -25,8 +25,7 @@ public class MovementManager : MonoBehaviour
     private Queue<int> playerActions;
     public delegate void OnRoundStart();
     public event OnRoundStart OnRoundStartEvent;
-    public delegate void OnGameStart();
-    public event OnGameStart OnGameStartEvent;
+
     private float gameStartDelay = 1;
     public float GameStartDelay { get => gameStartDelay; }
     private float playNextTimer = 1.6f;
@@ -50,12 +49,6 @@ public class MovementManager : MonoBehaviour
     void Start()
     {
         playerActions = new Queue<int>();
-        StartCoroutine("WaitForGameStart");
-        OnGameStartEvent?.Invoke();
-    }
-    IEnumerator WaitForGameStart()
-    {
-        yield return new WaitForSeconds(gameStartDelay);
     }
     public void AddAction(int actionType)
     {

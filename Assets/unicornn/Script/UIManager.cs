@@ -27,8 +27,7 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        MovementManager.Instance.OnGameStartEvent -= OpenPanel;
-        MovementManager.Instance.OnGameStartEvent += OpenPanel;
+        OpenPanel();
     }
 
     public void ClosePanel()
