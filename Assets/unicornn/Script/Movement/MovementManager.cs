@@ -12,10 +12,14 @@ public class MovementManager : MonoBehaviour
     }
     private void Awake()
     {
-        instance = MovementManager.Instance;
-        if (instance == null) instance = this as MovementManager;
-        if (instance == this) DontDestroyOnLoad(this);
-        else DestroyImmediate(this);
+        //instance = MovementManager.Instance;
+        instance = this;
+        //if (instance == null) instance = this as MovementManager;
+        // var players = FindObjectsOfType<PlayerMovement>();
+        // MovementManager.Instance.player1 = players[0].gameObject;
+        // MovementManager.Instance.player2 = players[1].gameObject;
+        //if (instance == this) DontDestroyOnLoad(this);
+        //else DestroyImmediate(this);
     }
 
     private Queue<int> playerActions;
@@ -38,6 +42,7 @@ public class MovementManager : MonoBehaviour
     private int uiCount = 0;
 
     // Start is called before the first frame update
+    
     void Start()
     {
         playerActions = new Queue<int>();
@@ -74,6 +79,8 @@ public class MovementManager : MonoBehaviour
         if (currentRound == 1)
         {
             Debug.Log($"cr: {currentRound}");
+            if(Player1==null||Player2==null)
+                return;
             switch (actionType)
             {
                 case 0:

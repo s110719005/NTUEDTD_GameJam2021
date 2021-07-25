@@ -4,24 +4,14 @@ using UnityEngine;
 
 public class Goal : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
     private void OnTriggerEnter2D(Collider2D other) {
-            Debug.Log("in");
         if(other.tag=="player1"){
+            FindObjectOfType<AudioManager>().Play("win");
             FindObjectOfType<UIManager>().WinP1();
-            Debug.Log("p1");
         }
         else if(other.tag=="player2"){
+            FindObjectOfType<AudioManager>().Play("win");
             FindObjectOfType<UIManager>().WinP2();
 
         }

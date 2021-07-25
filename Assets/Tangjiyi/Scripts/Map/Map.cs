@@ -15,7 +15,7 @@ namespace MapSystem
         {
             instance = Map.Instance;
             if (instance == null) instance = this as Map;
-            if (instance == this) DontDestroyOnLoad(this);
+            //if (instance == this) DontDestroyOnLoad(this);
             else DestroyImmediate(this);
         }
         //感謝學長大力支援!!
